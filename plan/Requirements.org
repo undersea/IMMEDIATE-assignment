@@ -1,0 +1,38 @@
+#+TITLE: Learning Support Requirements
+#+AUTHOR:    James Hurford
+#+DATE:      
+#+DESCRIPTION: 
+#+KEYWORDS: 
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+
+* Category
+
+- Vocals
+- Grammer
+- Geometry
+- etc
+
+* Concept
+- Key word/idea to give support on
+
+* Support options
+- Options available to the category chosen
+
+* Diagram
+#+ATTR_LaTeX: width=30em
+[[./../images/Diagram1.png]]
+
+* Requirements
+  - Must be able to select/edit the concept
+  - All the support options must be made available
+  - Support options, if need extra info, must be editable
+    - ie a sound file must be added to a selected option, so this has
+      to be supported
+  - Not all support options need be used
