@@ -27,11 +27,12 @@
 
 * Diagram
 #+ATTR_LaTeX: width=30em
-[[./../images/Diagram1.png]]
+[[../images/Diagram1.png]]
 
 * Requirements
   - Must be able to select/edit the concept
-  - All the support options must be made available
+  - All the support options for the category must be made available
+    for addition to the learning support
   - Support options, if need extra info, must be editable
     - ie a sound file must be added to a selected option, so this has
       to be supported

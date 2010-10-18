@@ -1,23 +1,72 @@
 #+TITLE:     IMMEDIATE Learning Support Authoring Progress Report
 #+AUTHOR:    James Hurford
-#+EMAIL:     jdhurfor@it040032-desktop
-#+DATE:      2010-10-03 Sun
+#+EMAIL:     terrasea@gmail.com
+#+DATE:      
 #+DESCRIPTION: 
 #+KEYWORDS: 
 #+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+LINK_UP:   
 #+LINK_HOME: 
-#+XSLT: 
+#+startup: beamer
 #+LaTeX_CLASS: beamer
-#+LaTeX_CLASS_OPTIONS: [presentation]
+#+LaTeX_CLASS_OPTIONS: [bigger]
 #+BEAMER_FRAME_LEVEL: 2
 #+BEAMER_HEADER_EXTRA: \usetheme{default}\usecolortheme{default}
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_envargs(Env Args) %4BEAMER_col(Col) %8BEAMER_extra(Extra)
 #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 :ETC
+
+
+* Presentation
+
+
+** Plan
+
+- Gather requirements
+- Develop Prototype
+- Show and confirm prototype design and functionality
+
+** ER Diagram
+#+ATTR_LaTeX: width=20em
+   [[../images/Diagram1.png]]
+
+** Requirements
+   - All the support options for the category must be made available
+   - Must be able to select/edit the concept for the category chosen
+   - Support options, if need extra info, must be editable
+   - Not all support options need be used
+
+
+
+
+
+** Initial ideas
+
+- Layered design
+#+BEGIN_DITAA layered-design -r -S -E
+/---------------------\
+| Subject             |
+|    /----------------+
+|    | Category       |
+|    |     /----------+
+|    |     |Concept   |
+|    |     | /--------+
+|    |     | |Support |
+\----+-----+-+--------/
+#+END_DITAA
+
+- Use a wizard
+#+ATTR_LaTeX: width=20em
+#+BEGIN_DITAA wizard-design -r -S -E
+/--------\   /-------\   /-------\
+| Choose |   |Choose |   |Choose +---->+
+|Category+---+Concept+---+Support|     |
+\--------/   \-------/   \-------/<----+
+#+END_DITAA
+
 
 

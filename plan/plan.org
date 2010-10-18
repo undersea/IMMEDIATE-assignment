@@ -1,8 +1,9 @@
 
-* Gather requirements
 
-* Prepare Prototype
+* Plan
+** Gather requirements
+** Prepare Prototype
 
-* Show and confirm prototype design and functionality with Russell
+** Show and confirm prototype design and functionality with Russell
 
-* Repeat and rinse
+** Repeat and rinse
