@@ -2,7 +2,7 @@ package immediate.learning.support;
 
 
 @Entity(name="SUBJECT")
-public class Subject {
+public class Subject implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name="ID", nullable=false)
@@ -12,8 +12,7 @@ public class Subject {
     @Column(name="TITLE" nullable=false)
     private String title;
 
-    @ManyToMany
-    @JoinTable(name="SUBJECT_CATEGORY")
+    @OneToMany(mappedBy="SUBJECT")
     private Set<Category> categories = new HashSet<Category>()
     
 }

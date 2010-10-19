@@ -7,9 +7,9 @@ class Category implements Serializable {
     @Column(name="ID", nullable=false)
     private Long id;
 
-    @ManyToMany
-    @JoinTable(name="SUBJECT_CATEGORY")
-    private Set<Subject> subjects = new HashSet<Subject>();
+    @ManyToOne
+    @JoinColumn(name="SUBJECT_ID", nullable=false)
+    private Subject subject;
 
 
     
