@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project name="immediate-learning-support" basedir="." default="test">
+  <property name="src.dir" value="src"/>
+  <property name="build.dir" value="build"/>
+  <property name="lib.dir" value="libs"/>
+
+  <path id="project.class.path">
+    <pathelement location="${lib.dir}/eclipselink/jlib/jpa/javax.persistence_1.0.0.jar"/>
+  </path>
+
+
+
+  <target name="test" depends="compile">
+    
+  </target>
+
+  <target name="compile" depends="clean,init">
+    <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="project.class.path">
+      <include name="**/*.java"/>
+      <compilerarg value="-Xlint"/>
+    </javac>
+  </target>
+
+  <target name="init">
+    <mkdir dir="${build.dir}"/>
+  </target>
+
+  <target name="clean">
+    <echo>Delete all class files uder build directory</echo>
+    <delete>
+      <fileset dir="${build.dir}" includes="**/*.class"/>
+    </delete>
+  </target>
+</project>
