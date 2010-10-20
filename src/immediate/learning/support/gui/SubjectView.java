@@ -20,15 +20,19 @@ class SubjectView extends JPanel {
     private EntityManagerFactory factory;
 
     SubjectView(String title) {
-        
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         associateSubject(title);
     }
 
-    private void associateSubject(String title) {
+    SubjectView(Long id) {
         factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        associateSubject(id);
+    }
+
+    private void associateSubject(String title) {
         EntityManager em = factory.createEntityManager();
         // find out if subject already exists or not and use that
-        Query q = em.createQuery(String.format("select title from Subject where title like %s", title));
+        Query q = em.createQuery(String.format("select title from Subject where title='%s'", title));
         @SuppressWarnings("unchecked")
         List<Subject> subjectList = q.getResultList();
         if(subjectList.size() != 0) {
@@ -42,6 +46,20 @@ class SubjectView extends JPanel {
             em.getTransaction().commit();
         
             em.close();
+        }
+    }
+
+
+    private void associateSubject(Long id) {
+        EntityManager em = factory.createEntityManager();
+        // find out if subject already exists or not and use that
+        Query q = em.createQuery(String.format("select title from Subject where id=%ld", id));
+        @SuppressWarnings("unchecked")
+        List<Subject> subjectList = q.getResultList();
+        if(subjectList.size() != 0) {
+            subject = subjectList.get(0);
+        } else {
+            // throw a ecveption here as no subject by id provided exists
         }
     }
 }

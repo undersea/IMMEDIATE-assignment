@@ -15,7 +15,7 @@
     
   </target>
 
-  <target name="compile" depends="clean,init">
+  <target name="compile" depends="init,clean">
     <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="project.class.path">
       <include name="**/*.java"/>
       <compilerarg value="-Xlint"/>
