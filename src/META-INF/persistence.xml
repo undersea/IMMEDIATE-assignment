@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <persistence>
-	<persistence-unit name="immediate" transaction-type="RESOURCE_LOCAL">
-		<class>immediate.learning.support.entity.Subject</class>
-                <class>immediate.learning.support.entity.Support</class>
-                <class>immediate.learning.support.entity.Category</class>
-		<class>immediate.learning.support.entity.Concept</class>
-                <class>immediate.learning.support.entity.SupportInstance</class>
-		<properties>
-			<property name="javax.persistence.jdbc.driver" value="com.rohanclan.ashpool.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url"
-				value="jdbc:ashpool://file://./DB" />
-			<!-- EclipseLink should create the database schema automatically -->
-			<property name="eclipselink.ddl-generation" value="create-tables" />
-			<property name="eclipselink.ddl-generation.output-mode"
-				value="database" />
-		</properties>
-
-	</persistence-unit>
-
+  <persistence-unit name="immediate" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>immediate.learning.support.entity.Subject</class>
+    <class>immediate.learning.support.entity.Support</class>
+    <class>immediate.learning.support.entity.Category</class>
+    <class>immediate.learning.support.entity.Concept</class>
+    <class>immediate.learning.support.entity.SupportInstance</class>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.rohanclan.ashpool.jdbc.Driver" />
+      <property name="javax.persistence.jdbc.url"
+                value="jdbc:ashpool://file://./DB" />
+      <!-- EclipseLink should create the database schema automatically -->
+      <property name="eclipselink.ddl-generation" value="create-tables" />
+      <property name="eclipselink.ddl-generation.output-mode"
+                value="database" />
+    </properties>
+  </persistence-unit>
 </persistence>

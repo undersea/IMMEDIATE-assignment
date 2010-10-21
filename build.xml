@@ -7,8 +7,10 @@
   <property name="app.dir" value="prototypes"/>
 
   <path id="project.class.path">
-    <pathelement location="${lib.dir}/eclipselink/jlib/jpa/javax.persistence_1.0.0.jar"/>
+    <pathelement location="${lib.dir}/eclipselink.jar"/>
+    <pathelement location="${lib.dir}/javax.persistence_1.0.0.jar"/>
     <pathelement location="${lib.dir}/commons-lang.jar"/>
+    <pathelement location="${lib.dir}/Ashpool.jar"/>
   </path>
 
 
@@ -32,7 +34,8 @@
     
     <java dir="${basedir}" jar="${app.dir}/immediate.jar" fork="true" classpathref="project.class.path">
       <classpath>
-        <pathelement location="${lib.dir}/eclipselink/jlib/jpa/javax.persistence_1.0.0.jar"/>
+        <pathelement location="${lib.dir}/eclipselink.jar"/>
+        <pathelement location="${lib.dir}/javax.persistence_1.0.0.jar"/>
         <pathelement location="${lib.dir}/commons-lang.jar"/>
         <!--<pathelement location="dist/test.jar"/>-->
         <pathelement path="${java.class.path}"/>
