@@ -8,6 +8,9 @@
     <class>immediate.learning.support.entity.Concept</class>
     <class>immediate.learning.support.entity.SupportInstance</class>
     <properties>
+      <property name="eclipselink.target-database" 
+value="org.eclipse.persistence.platform.database.FirebirdPlatform"/>
+
       <property name="javax.persistence.jdbc.driver" value="com.rohanclan.ashpool.jdbc.Driver" />
       <property name="javax.persistence.jdbc.url"
                 value="jdbc:ashpool://file://./DB" />

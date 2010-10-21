@@ -21,6 +21,15 @@
 
 
   <target name="archive" depends="compile">
+    <!-- Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.1
+Created-By: 1.6.0_20-b02 (Sun Microsystems Inc.)
+Main-Class: demoeclipselink.Main
+Class-Path: lib/eclipselink.jar lib/javax.persistence_1.0.0.jar lib/jd
+ bc-mysql.jar
+X-COMMENT: Main-Class will be added automatically by build
+
+-->
     <jar destfile="${app.dir}/immediate.jar" basedir="${build.dir}">
       <manifest>
         <attribute name="Main-Class"
