@@ -1,18 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<project name="immediate-learning-support" basedir="." default="test">
+<project name="immediate-learning-support" basedir="." default="run">
   <property name="src.dir" value="src"/>
   <property name="build.dir" value="build"/>
   <property name="lib.dir" value="libs"/>
+  <property name="app.dir" value="prototypes"/>
 
   <path id="project.class.path">
     <pathelement location="${lib.dir}/eclipselink/jlib/jpa/javax.persistence_1.0.0.jar"/>
+    <pathelement location="${lib.dir}/commons-lang.jar"/>
   </path>
 
 
 
-  <target name="test" depends="compile">
+  <target name="test" depends="archive">
     
+  </target>
+
+
+  <target name="archive" depends="compile">
+    <jar destfile="${app.dir}/immediate.jar" basedir="${build.dir}">
+      <manifest>
+        <attribute name="Main-Class"
+                 value="Main"/>
+      </manifest>
+
+    </jar>
+  </target>
+
+  <target name="run" depends="test">
+    
+    <java dir="${basedir}" jar="${app.dir}/immediate.jar" fork="true" classpathref="project.class.path">
+      <classpath>
+        <pathelement location="${lib.dir}/eclipselink/jlib/jpa/javax.persistence_1.0.0.jar"/>
+        <pathelement location="${lib.dir}/commons-lang.jar"/>
+        <!--<pathelement location="dist/test.jar"/>-->
+        <pathelement path="${java.class.path}"/>
+      </classpath>
+
+    </java>
   </target>
 
   <target name="compile" depends="init,clean">
@@ -24,6 +50,9 @@
 
   <target name="init">
     <mkdir dir="${build.dir}"/>
+    <copy todir="${build.dir}/META-INF">
+      <fileset dir="${src.dir}/META-INF"/>
+    </copy>
   </target>
 
   <target name="clean">

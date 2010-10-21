@@ -22,6 +22,7 @@ class SubjectView extends JPanel {
     SubjectView(String title) {
         factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         associateSubject(title);
+        
     }
 
     SubjectView(Long id) {
@@ -29,10 +30,10 @@ class SubjectView extends JPanel {
         associateSubject(id);
     }
 
-    private void associateSubject(String title) {
+    protected void associateSubject(String title) {
         EntityManager em = factory.createEntityManager();
         // find out if subject already exists or not and use that
-        Query q = em.createQuery(String.format("select title from Subject where title='%s'", title));
+        Query q = em.createQuery(String.format("select s from Subject s where title='%s'", title));
         @SuppressWarnings("unchecked")
         List<Subject> subjectList = q.getResultList();
         if(subjectList.size() != 0) {
@@ -50,7 +51,7 @@ class SubjectView extends JPanel {
     }
 
 
-    private void associateSubject(Long id) {
+    protected void associateSubject(Long id) {
         EntityManager em = factory.createEntityManager();
         // find out if subject already exists or not and use that
         Query q = em.createQuery(String.format("select title from Subject where id=%ld", id));

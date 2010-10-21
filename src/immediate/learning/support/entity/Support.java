@@ -25,7 +25,9 @@ class Support implements Serializable {
     @OneToMany(mappedBy="CONCEPT")
     private Set<SupportInstance> instances = new HashSet<SupportInstance>();
 
-    
+    @Column(name="component", nullable=false)
+    private String component;
+
     public Long getId() {
         return id;
     }
@@ -38,4 +40,14 @@ class Support implements Serializable {
     public Set<SupportInstance> getInstances() {
         return instances;
     }
+
+    
+    public String getComponent() {
+        return component;
+    }
+
+    public void setComponent(String component) {
+        this.component = component;
+    }
+    
 }

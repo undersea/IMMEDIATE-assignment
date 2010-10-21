@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 @Entity(name="CATEGORY")
-class Category implements Serializable {
+public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -29,6 +29,9 @@ class Category implements Serializable {
     @OneToMany(mappedBy="CONCEPT")
     private Set<SupportInstance> instances = new HashSet<SupportInstance>();
     
+
+    @Column(name="NAME", nullable=false, unique=true)
+    private String name;
 
     public Long getId() {
         return id;
@@ -51,5 +54,15 @@ class Category implements Serializable {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

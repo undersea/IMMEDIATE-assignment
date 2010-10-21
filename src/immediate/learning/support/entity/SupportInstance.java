@@ -26,11 +26,11 @@ class SupportInstance implements Serializable {
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name="CONCEPT_ID", nullable=false)
+    @JoinColumn(name="CONCEPT_ID", nullable=true)
     private Concept concept;
 
     @ManyToOne
-    @JoinColumn(name="SUPPORT_ID", nullable=false)
+    @JoinColumn(name="SUPPORT_ID", nullable=true)
     private Support support;    
 
 
