@@ -7,10 +7,14 @@
   <property name="app.dir" value="prototypes"/>
 
   <path id="project.class.path">
-    <pathelement location="${lib.dir}/eclipselink.jar"/>
-    <pathelement location="${lib.dir}/javax.persistence_1.0.0.jar"/>
+    <!--<pathelement location="${lib.dir}/eclipselink.jar"/>-->
+    <!--<pathelement location="${lib.dir}/javax.persistence_1.0.0.jar"/>-->
     <pathelement location="${lib.dir}/commons-lang.jar"/>
-    <pathelement location="${lib.dir}/Ashpool.jar"/>
+    <pathelement location="${lib.dir}/org.springframework.orm-3.0.5.RELEASE.jar"/> <!--jpa support -->
+    <pathelement location="${lib.dir}/toplink-essentials.jar"/> <!--jpa-2.0 api -->
+    <pathelement location="${lib.dir}/org.springframework.transaction-3.0.5.RELEASE.jar"/> <!--dao support -->
+    <pathelement location="${lib.dir}/org.springframework.beans-3.0.5.RELEASE.jar"/> <!--bean support -->
+    <pathelement location="${lib.dir}/org.springframework.core-3.0.5.RELEASE.jar"/> <!--core stuff like exceptions needed -->
   </path>
 
 
@@ -34,6 +38,8 @@ X-COMMENT: Main-Class will be added automatically by build
       <manifest>
         <attribute name="Main-Class"
                  value="Main"/>
+        <attribute name="Class-Path"
+                   value="${lib.dir}/eclipselink.jar ${lib.dir}/javax.persistence_1.0.0.jar ${lib.dir}/Ashpool.jar ${lib.dir}/commons-lang.jar"/>
       </manifest>
 
     </jar>
@@ -41,14 +47,14 @@ X-COMMENT: Main-Class will be added automatically by build
 
   <target name="run" depends="test">
     
-    <java dir="${basedir}" jar="${app.dir}/immediate.jar" fork="true" classpathref="project.class.path">
-      <classpath>
+    <java dir="${app.dir}" jar="${app.dir}/immediate.jar" fork="true" classpathref="project.class.path">
+<!--      <classpath>
         <pathelement location="${lib.dir}/eclipselink.jar"/>
         <pathelement location="${lib.dir}/javax.persistence_1.0.0.jar"/>
         <pathelement location="${lib.dir}/commons-lang.jar"/>
-        <!--<pathelement location="dist/test.jar"/>-->
+        
         <pathelement path="${java.class.path}"/>
-      </classpath>
+      </classpath>-->
 
     </java>
   </target>
@@ -64,6 +70,9 @@ X-COMMENT: Main-Class will be added automatically by build
     <mkdir dir="${build.dir}"/>
     <copy todir="${build.dir}/META-INF">
       <fileset dir="${src.dir}/META-INF"/>
+    </copy>
+    <copy todir="${app.dir}/${lib.dir}">
+      <fileset dir="${lib.dir}"/>
     </copy>
   </target>
 

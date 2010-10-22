@@ -23,3 +23,16 @@
 /prototypes/immediate.jar
 /src/META-INF/#persistence.xml#
 /src/META-INF/.#persistence.xml
+/build/immediate/learning/support/dao/JpaSubjectDao.class
+/build/immediate/learning/support/dao/SubjectDao.class
+/prototypes/libs/Ashpool.jar
+/prototypes/libs/commons-lang.jar
+/prototypes/libs/eclipselink.jar
+/prototypes/libs/javax.persistence_1.0.0.jar
+/prototypes/libs/org.springframework.aspects-3.0.5.RELEASE.jar
+/prototypes/libs/org.springframework.beans-3.0.5.RELEASE.jar
+/prototypes/libs/org.springframework.core-3.0.5.RELEASE.jar
+/prototypes/libs/org.springframework.orm-3.0.5.RELEASE.jar
+/prototypes/libs/org.springframework.test-3.0.5.RELEASE.jar
+/prototypes/libs/org.springframework.transaction-3.0.5.RELEASE.jar
+/prototypes/libs/toplink-essentials.jar
