@@ -9,7 +9,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <property name="entityManagerFactory" ref="entityManagerFactory"/>
   </bean>
 
-  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.ContainerEntityManagerFactoryBean">
+  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="dataSource"/>
     <property name="jpaVendorAdapter">
       <bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter">

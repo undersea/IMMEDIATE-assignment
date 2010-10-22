@@ -15,6 +15,7 @@
     <pathelement location="${lib.dir}/org.springframework.transaction-3.0.5.RELEASE.jar"/> <!--dao support -->
     <pathelement location="${lib.dir}/org.springframework.beans-3.0.5.RELEASE.jar"/> <!--bean support -->
     <pathelement location="${lib.dir}/org.springframework.core-3.0.5.RELEASE.jar"/> <!--core stuff like exceptions needed -->
+    <pathelement location="${lib.dir}/org.springframework.context-3.0.5.RELEASE.jar"/> <!--contains the app context loader-->
   </path>
 
 
@@ -39,7 +40,7 @@ X-COMMENT: Main-Class will be added automatically by build
         <attribute name="Main-Class"
                  value="Main"/>
         <attribute name="Class-Path"
-                   value="${lib.dir}/eclipselink.jar ${lib.dir}/javax.persistence_1.0.0.jar ${lib.dir}/Ashpool.jar ${lib.dir}/commons-lang.jar"/>
+                   value="${lib.dir}/org.springframework.aspects-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.beans-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.core-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.orm-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.test-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.transaction-3.0.5.RELEASE.jar ${lib.dir}/sqltool.jar ${lib.dir}/toplink-essentials.jar ${lib.dir}/commons-lang.jar ${lib.dir}/org.springframework.context-3.0.5.RELEASE.jar ${lib.dir}/commons-logging.jar ${lib.dir}/org.springframework.asm-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.expression-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.jdbc-3.0.5.RELEASE.jar"/>
       </manifest>
 
     </jar>
@@ -70,6 +71,9 @@ X-COMMENT: Main-Class will be added automatically by build
     <mkdir dir="${build.dir}"/>
     <copy todir="${build.dir}/META-INF">
       <fileset dir="${src.dir}/META-INF"/>
+    </copy>
+    <copy todir="${build.dir}">
+      <fileset dir="${src.dir}" includes="applicationContext.xml"/>
     </copy>
     <copy todir="${app.dir}/${lib.dir}">
       <fileset dir="${lib.dir}"/>

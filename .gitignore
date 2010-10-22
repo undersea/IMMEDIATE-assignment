@@ -36,3 +36,14 @@
 /prototypes/libs/org.springframework.test-3.0.5.RELEASE.jar
 /prototypes/libs/org.springframework.transaction-3.0.5.RELEASE.jar
 /prototypes/libs/toplink-essentials.jar
+/build/META-INF/orm.xml
+/build/applicationContext.xml
+/prototypes/libs/commons-logging-adapters.jar
+/prototypes/libs/commons-logging-api.jar
+/prototypes/libs/commons-logging.jar
+/prototypes/libs/hsqldb.jar
+/prototypes/libs/org.springframework.asm-3.0.5.RELEASE.jar
+/prototypes/libs/org.springframework.context-3.0.5.RELEASE.jar
+/prototypes/libs/org.springframework.expression-3.0.5.RELEASE.jar
+/prototypes/libs/org.springframework.jdbc-3.0.5.RELEASE.jar
+/prototypes/libs/sqltool.jar

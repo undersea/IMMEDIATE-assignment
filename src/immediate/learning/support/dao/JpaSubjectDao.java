@@ -18,13 +18,13 @@ public class JpaSubjectDao extends JpaDaoSupport implements SubjectDao {
         getJpaTemplate().persist(subject);
     }
 
-  public Subject update(Subject subject) {
-    return getJpaTemplate().merge(subject);
-  }
+    public Subject update(Subject subject) {
+        return getJpaTemplate().merge(subject);
+    }
 
-  public void delete(Subject subject) {
-    getJpaTemplate().remove(subject);
-  }
+    public void delete(Subject subject) {
+        getJpaTemplate().remove(subject);
+    }
 
 
 }

@@ -19,7 +19,7 @@ public class CategoryView extends JPanel {
     private static final long serialVersionUID = 1L;
 
     private Category category;
-    private static final String PERSISTENCE_UNIT_NAME = "learning";
+    private static final String PERSISTENCE_UNIT_NAME = "im";
     private EntityManagerFactory factory;
 
     CategoryView() {
