@@ -19,6 +19,7 @@ public class Main {
     @Qualifier(value = "categoryDao")
     static Dao<Category> categoryDao;
 
+    @SuppressWarnings("unchecked")
     public static void main(String[] argv) {
         //EntityManagerFactory emf = Persistence.createEntityManagerFactory("im");
         SubjectDao subjectDao;
