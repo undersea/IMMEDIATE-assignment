@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 
-@Entity(name="CONCEPT")
+@Entity
 class Concept implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -21,7 +21,7 @@ class Concept implements Serializable {
     @Column(name="ID", nullable=false)
     private Long id;
 
-    @OneToMany(mappedBy="CONCEPT")
+    @OneToMany(mappedBy="concept")
     private Set<SupportInstance> instances = new HashSet<SupportInstance>();
 
     public Long getId() {

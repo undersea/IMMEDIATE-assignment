@@ -47,3 +47,11 @@
 /prototypes/libs/org.springframework.expression-3.0.5.RELEASE.jar
 /prototypes/libs/org.springframework.jdbc-3.0.5.RELEASE.jar
 /prototypes/libs/sqltool.jar
+
+/prototypes/hsql:temp.log
+/prototypes/hsql:temp.properties
+/prototypes/hsql:temp.script
+/prototypes/libs/org.springframework.instrument-3.0.5.RELEASE.jar
+/build/immediate/learning/support/dao/Dao.class
+/build/immediate/learning/support/dao/JpaDao.class
+/build/immediate/learning/support/gui/View.class

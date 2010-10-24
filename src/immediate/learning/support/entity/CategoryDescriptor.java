@@ -1,53 +1,51 @@
 package immediate.learning.support.entity;
 
-
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToOne;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.HashSet;
 
 
 @Entity
-class Support implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+public class CategoryDescriptor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name="ID", nullable=false)
     private Long id;
 
-    @OneToMany(mappedBy="support")
-    private Set<SupportInstance> instances = new HashSet<SupportInstance>();
+    @ManyToOne
+    private Category category;
 
-    @Column(name="component", nullable=false)
+    //Will be a string representation of a class
+    @Column(name="COMPONENT")
     private String component;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-    public Set<SupportInstance> getInstances() {
-        return instances;
-    }
-
     
+    public Category getCategory() {
+        return category;
+    }
+
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+
     public String getComponent() {
         return component;
     }
 
+
     public void setComponent(String component) {
         this.component = component;
     }
-    
 }

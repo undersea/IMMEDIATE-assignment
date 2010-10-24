@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import java.util.Set;
 import java.util.HashSet;
 
-@Entity(name="CATEGORY")
+@Entity
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -23,12 +23,13 @@ public class Category implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="SUBJECT_ID", nullable=false)
     private Subject subject;
 
-    @OneToMany(mappedBy="CONCEPT")
+    @OneToMany(mappedBy="category")
     private Set<SupportInstance> instances = new HashSet<SupportInstance>();
     
+    @OneToMany(mappedBy="category")
+    private Set<CategoryDescriptor> possibleComponents = new HashSet<CategoryDescriptor>();
 
     @Column(name="NAME", nullable=false, unique=true)
     private String name;
@@ -64,5 +65,9 @@ public class Category implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<CategoryDescriptor> getPossibleComponents() {
+        return possibleComponents;
     }
 }

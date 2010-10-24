@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 
 
 
-@Entity(name="SUPPORTINSTANCE")
+@Entity
 class SupportInstance implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -22,15 +22,12 @@ class SupportInstance implements Serializable {
     
 
     @ManyToOne
-    @JoinColumn(name="CATEGORY_ID", nullable=false)
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name="CONCEPT_ID", nullable=true)
     private Concept concept;
 
     @ManyToOne
-    @JoinColumn(name="SUPPORT_ID", nullable=true)
     private Support support;    
 
 

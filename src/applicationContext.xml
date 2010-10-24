@@ -9,6 +9,35 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <property name="entityManagerFactory" ref="entityManagerFactory"/>
   </bean>
 
+  <bean id="categoryDao" class="immediate.learning.support.dao.JpaDao">
+    
+    <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    <constructor-arg>
+        <value>immediate.learning.support.entity.Category</value>
+    </constructor-arg>
+  </bean>
+
+  <bean id="conceptDao" class="immediate.learning.support.dao.JpaDao">
+    <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    <constructor-arg>
+        <value>immediate.learning.support.entity.Concept</value>
+    </constructor-arg>
+  </bean>
+
+  <bean id="supportDao" class="immediate.learning.support.dao.JpaDao">
+    <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    <constructor-arg>
+        <value>immediate.learning.support.entity.Support</value>
+    </constructor-arg>
+  </bean>
+
+  <bean id="supportInstanceDao" class="immediate.learning.support.dao.JpaDao">
+    <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    <constructor-arg>
+        <value>immediate.learning.support.entity.SupportInstance</value>
+    </constructor-arg>
+  </bean>
+
   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="dataSource"/>
     <property name="jpaVendorAdapter">
@@ -19,15 +48,16 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
       </bean>
     </property>
     <property name="loadTimeWeaver">
-      <bean class="org.springframework.instrument.classloading.SimpleLoadTimeWeaver"/>
+      <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
     </property>
   </bean>
 
   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
-    <property name="url" value="jdbc:hsqldb:hsql://localhost/"/>
+    <property name="url" value="jdbc:hsqldb:hsql:temp"/>
     <property name="username" value="sa"/>
     <property name="password" value=""/>
+    
   </bean>
 
   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

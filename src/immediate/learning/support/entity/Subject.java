@@ -3,6 +3,7 @@ package immediate.learning.support.entity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -12,7 +13,7 @@ import javax.persistence.GeneratedValue;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name="SUBJECT")
+@Entity
 public class Subject implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -22,10 +23,10 @@ public class Subject implements Serializable {
     private Long id;
     
 
-    @Column(name="TITLE", nullable=false)
+    @Column(name="TITLE", nullable=false, unique=true)
     private String title;
 
-    @OneToMany(mappedBy="SUBJECT")
+    @OneToMany(mappedBy="subject")
     private Set<Category> categories = new HashSet<Category>();
 
 
@@ -52,4 +53,8 @@ public class Subject implements Serializable {
         return categories;
     }   
     
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
 }
