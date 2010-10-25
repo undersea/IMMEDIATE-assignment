@@ -1,6 +1,7 @@
 package immediate.learning.support.gui;
 
-import javax.swing.JPanel;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -14,7 +15,8 @@ import java.util.List;
 import immediate.learning.support.entity.Subject;
 import immediate.learning.support.dao.SubjectDao;
 
-public class SubjectView extends JPanel {
+/*the only view class not to implement View due to it's specialised needs*/
+public class SubjectView extends Box {
     private static final long serialVersionUID = 1L;
 
     private Subject subject;
@@ -22,6 +24,7 @@ public class SubjectView extends JPanel {
     private SubjectDao subjectDao;
 
     public SubjectView(String title, SubjectDao dao) {
+        super(BoxLayout.Y_AXIS);
         subjectDao = dao;
         associateSubject(title);
         JLabel idLabel = new JLabel("Subject ID");
@@ -36,6 +39,7 @@ public class SubjectView extends JPanel {
     }
 
     public SubjectView(Long id, SubjectDao dao) {
+        super(BoxLayout.Y_AXIS);
         subjectDao = dao;
         associateSubject(id);
     }
