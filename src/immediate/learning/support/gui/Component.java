@@ -1,8 +1,10 @@
 package immediate.learning.support.gui;
 
-import javax.swing.JPanel;
+import java.io.Serializable;
 
 
-public abstract class Component extends JPanel {
-
+public interface Component extends Serializable {
+    public void configure();
+    public String getName();
+    public String getDescription();
 }

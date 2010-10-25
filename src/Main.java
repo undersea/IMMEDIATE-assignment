@@ -1,5 +1,6 @@
 import immediate.learning.support.gui.SubjectView;
 import immediate.learning.support.gui.CategoryView;
+import immediate.learning.support.gui.ExplainMore;
 
 
 import javax.persistence.EntityManager;
@@ -38,6 +39,8 @@ public class Main {
         SubjectView view = new SubjectView("Calculus I", subjectDao);
         System.out.println("CategoryDao: " + categoryDao.getType());
         System.out.println("CategoryDescriptorDao: " + categoryDescriptorDao.getType());
+        ExplainMore more = new ExplainMore();
+        more.configure();
         javax.swing.JFrame frame = new javax.swing.JFrame();
         frame.getContentPane().add(view);
         frame.pack();
