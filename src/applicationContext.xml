@@ -10,10 +10,17 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
   </bean>
 
   <bean id="categoryDao" class="immediate.learning.support.dao.JpaDao">
-    
     <property name="entityManagerFactory" ref="entityManagerFactory"/>
     <constructor-arg>
-        <value>immediate.learning.support.entity.Category</value>
+      <value>immediate.learning.support.entity.Category</value>
+    </constructor-arg>
+  </bean>
+
+
+  <bean id="categoryDescriptorDao" class="immediate.learning.support.dao.JpaDao">
+    <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    <constructor-arg>
+      <value>immediate.learning.support.entity.CategoryDescriptor</value>
     </constructor-arg>
   </bean>
 
@@ -54,7 +61,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
-    <property name="url" value="jdbc:hsqldb:hsql:temp"/>
+    <property name="url" value="jdbc:hsqldb:hsql:immediate"/>
     <property name="username" value="sa"/>
     <property name="password" value=""/>
     

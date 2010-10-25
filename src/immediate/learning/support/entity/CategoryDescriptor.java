@@ -15,6 +15,9 @@ import java.util.Set;
 import java.util.HashSet;
 
 
+import immediate.learning.support.gui.Component;
+
+
 @Entity
 public class CategoryDescriptor implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -29,7 +32,7 @@ public class CategoryDescriptor implements Serializable {
 
     //Will be a string representation of a class
     @Column(name="COMPONENT")
-    private String component;
+    private Component component;
 
     
     public Category getCategory() {
@@ -42,12 +45,12 @@ public class CategoryDescriptor implements Serializable {
     }
 
 
-    public String getComponent() {
+    public Component getComponent() {
         return component;
     }
 
 
-    public void setComponent(String component) {
+    public void setComponent(Component component) {
         this.component = component;
     }
 }

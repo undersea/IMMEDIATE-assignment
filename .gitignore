@@ -56,3 +56,7 @@
 /build/immediate/learning/support/dao/JpaDao.class
 /build/immediate/learning/support/gui/View.class
 /build/immediate/learning/support/entity/CategoryDescriptor.class
+/build/immediate/learning/support/gui/Component.class
+/prototypes/hsql:immediate.log
+/prototypes/hsql:immediate.properties
+/prototypes/hsql:immediate.script
