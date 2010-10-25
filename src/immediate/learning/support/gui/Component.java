@@ -1,10 +1,10 @@
 package immediate.learning.support.gui;
 
 import java.io.Serializable;
-
+import javax.swing.JComponent;
 
 public interface Component extends Serializable {
-    public void configure();
+    public JComponent configure();
     public String getName();
     public String getDescription();
 }

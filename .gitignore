@@ -60,3 +60,5 @@
 /prototypes/hsql:immediate.log
 /prototypes/hsql:immediate.properties
 /prototypes/hsql:immediate.script
+/build/immediate/learning/support/gui/ExplainMore$Configuration.class
+/build/immediate/learning/support/gui/ExplainMore.class

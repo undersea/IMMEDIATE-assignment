@@ -40,7 +40,8 @@ public class Main {
         System.out.println("CategoryDao: " + categoryDao.getType());
         System.out.println("CategoryDescriptorDao: " + categoryDescriptorDao.getType());
         ExplainMore more = new ExplainMore();
-        more.configure();
+        javax.swing.JComponent panel = more.configure();
+        view.add(panel);
         javax.swing.JFrame frame = new javax.swing.JFrame();
         frame.getContentPane().add(view);
         frame.pack();
