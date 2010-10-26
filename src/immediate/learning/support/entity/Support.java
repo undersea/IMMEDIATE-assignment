@@ -37,8 +37,12 @@ class Support implements Serializable {
     }
 
 
-    public Set<SupportInstance> getInstances() {
+    public Set<SupportInstance> getInstance() {
         return instances;
+    }
+
+    public void setInstance(Set<SupportInstance> instance) {
+        this.instances = instance;
     }
 
     

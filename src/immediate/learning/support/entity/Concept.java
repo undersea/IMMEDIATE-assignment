@@ -13,7 +13,7 @@ import java.util.HashSet;
 
 
 @Entity
-class Concept implements Serializable {
+public class Concept implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -46,5 +46,10 @@ class Concept implements Serializable {
 
     public Set<SupportInstance> getInstances() {
         return instances;
+    }
+
+
+    public void setInstances(Set<SupportInstance> instance) {
+        this.instances = instance;
     }
 }

@@ -45,6 +45,9 @@ public class Category implements Serializable {
         return instances;
     }
 
+    public void setInstances(Set<SupportInstance> instance) {
+        this.instances = instance;
+    }
 
     public Subject getSubject() {
         return subject;

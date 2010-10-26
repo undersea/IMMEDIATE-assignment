@@ -9,10 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
-class SupportInstance implements Serializable {
+public class SupportInstance implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -28,7 +29,7 @@ class SupportInstance implements Serializable {
     private Concept concept;
 
     @ManyToOne
-    private Support support;    
+    private Support support;
 
 
     public Long getId() {

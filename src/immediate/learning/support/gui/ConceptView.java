@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
 import java.util.List;
 import java.util.Vector;
 
-import immediate.learning.support.entity.Subject;
+import immediate.learning.support.entity.Concept;
 import immediate.learning.support.entity.Category;
 import immediate.learning.support.entity.CategoryNames;
 import immediate.learning.support.entity.CategoryDescriptor;
@@ -56,14 +56,14 @@ public class ConceptView extends Box {
         
         associateDaos(appContext);
         
-        associateSubject(title);
+        associateConcept(title);
         JLabel idLabel = new JLabel("Subject ID");
         add(idLabel);
-        JTextField idField = new JTextField(subject.getId().toString());
+        JTextField idField = new JTextField(concept.getId().toString());
         add(idField);
         JLabel titleLabel = new JLabel("Subject");
         add(titleLabel);
-        JTextField titleField = new JTextField(subject.getTitle());
+        JTextField titleField = new JTextField(concept.getName());
         add(titleField);
         add(createCategoryPanel());
         
@@ -75,7 +75,7 @@ public class ConceptView extends Box {
         associateDaos(appContext);
         setPreferredSize(new java.awt.Dimension(300, 300));
         
-        associateSubject(id);
+        associateConcept(id);
         add(createCategoryPanel());
     }
 
@@ -99,31 +99,15 @@ public class ConceptView extends Box {
         listScroller.setPreferredSize(new Dimension(250, 80));
 
         panel.add(listScroller);
-        Box bbox = new Box(BoxLayout.Y_AXIS);
-        panel.add(bbox);
-        JButton addButton = new JButton("Add");
-        bbox.add(addButton);
-        JButton removeButton = new JButton("Remove");
-        bbox.add(removeButton);
-        JList possibleCategory = createPosibleCategoryList();
         
-        possibleCategory.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        possibleCategory.setLayoutOrientation(JList.VERTICAL_WRAP);
-        possibleCategory.setVisibleRowCount(10);
-        JScrollPane listScroller2 = new JScrollPane(possibleCategory);
-        listScroller2.setPreferredSize(new Dimension(250, 80));
-        panel.add(listScroller2);
-
         return panel;
     }
 
     public JList createActualCategoryList() {
-        return new JList(new Vector<Category>(subject.getCategories()));
+        return new JList();
     }
 
-    public JList createPosibleCategoryList() {
-        return new JList(new Vector<CategoryNames>(cnDao.getAll()));
-    }
+    
 
     
     protected void associateConcept(String name) {

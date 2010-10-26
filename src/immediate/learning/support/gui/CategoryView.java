@@ -12,12 +12,14 @@ import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
 
+
 import java.util.List;
 import java.util.Vector;
 
 import immediate.learning.support.entity.Subject;
 import immediate.learning.support.entity.Category;
 import immediate.learning.support.entity.CategoryNames;
+import immediate.learning.support.entity.SupportInstance;
 import immediate.learning.support.entity.CategoryDescriptor;
 import immediate.learning.support.dao.SubjectDao;
 import immediate.learning.support.dao.Dao;
@@ -37,8 +39,8 @@ public class CategoryView extends Box {
     static Dao<Category> categoryDao;
 
     @Autowired
-    @Qualifier(value = "categoryNamesDao")
-    static Dao<CategoryNames> cnDao;
+    @Qualifier(value = "supportInstanceDao")
+    static Dao<SupportInstance> cnDao;
 
     @Autowired
     @Qualifier(value = "categoryDescriptorDao")
@@ -55,16 +57,11 @@ public class CategoryView extends Box {
         
         associateDaos(appContext);
         
-        associateSubject(title);
-        JLabel idLabel = new JLabel("Subject ID");
-        add(idLabel);
-        JTextField idField = new JTextField(subject.getId().toString());
-        add(idField);
-        JLabel titleLabel = new JLabel("Subject");
-        add(titleLabel);
-        JTextField titleField = new JTextField(subject.getTitle());
+        associateCategory(title);
+
+        JTextField titleField = new JTextField(String.format("Category: %s", category.getName()));
         add(titleField);
-        add(createCategoryPanel());
+        
         
     }
 
@@ -74,8 +71,9 @@ public class CategoryView extends Box {
         associateDaos(appContext);
         setPreferredSize(new java.awt.Dimension(300, 300));
         
-        associateSubject(id);
-        add(createCategoryPanel());
+        associateCategory(id);
+        JTextField titleField = new JTextField(String.format("Category: %s", category.getName()));
+        add(titleField);
     }
 
 
@@ -84,27 +82,13 @@ public class CategoryView extends Box {
         categoryDao = (Dao<Category>)appContext.getBean("categoryDao");
         cDao = 
             (CategoryDescriptorDao)appContext.getBean("categoryDescriptorDao");
-        cnDao = (Dao<CategoryNames>)appContext.getBean("categoryNamesDao");
+        cnDao = (Dao<SupportInstance>)appContext.getBean("supportInstanceDao");
     }
 
-    public Box createCategoryPanel() {
+    public Box createConceptPanel() {
         Box panel = new Box(BoxLayout.X_AXIS);
-        JList selectedCategory = createActualCategoryList();
         
-        selectedCategory.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        selectedCategory.setLayoutOrientation(JList.VERTICAL_WRAP);
-        selectedCategory.setVisibleRowCount(10);
-        JScrollPane listScroller = new JScrollPane(selectedCategory);
-        listScroller.setPreferredSize(new Dimension(250, 80));
-
-        panel.add(listScroller);
-        Box bbox = new Box(BoxLayout.Y_AXIS);
-        panel.add(bbox);
-        JButton addButton = new JButton("Add");
-        bbox.add(addButton);
-        JButton removeButton = new JButton("Remove");
-        bbox.add(removeButton);
-        JList possibleCategory = createPosibleCategoryList();
+        JList possibleCategory = createConceptList();
         
         possibleCategory.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         possibleCategory.setLayoutOrientation(JList.VERTICAL_WRAP);
@@ -116,33 +100,29 @@ public class CategoryView extends Box {
         return panel;
     }
 
-    public JList createActualCategoryList() {
-        return new JList(new Vector<Category>(subject.getCategories()));
-    }
 
-    public JList createPosibleCategoryList() {
-        return new JList(new Vector<CategoryNames>(cnDao.getAll()));
-    }
+    protected void associateCategory(String title) {
 
-    
-
-    protected void associateSubject(String title) {
-        List<Subject> subjectList = subjectDao.findByName(title);
-        if(subjectList.size() != 0) {
-            subject = subjectList.get(0);
-            System.out.println("Old subject row selected" + subjectList.size());
-        } else {
-            // Create new subject
-            subject = new Subject();
-            subject.setTitle(title);
-            subjectDao.save(subject);
+        // Create new subject
+        category = new Category();
+        category.setName(title);
+        categoryDao.save(category);
             
-            System.out.println("New subject row selected");
-        }
+        
+        
     }
 
 
-    protected void associateSubject(Long id) {
-        subject = subjectDao.findById(id);
+    protected void associateCategory(Long id) {
+        category = categoryDao.findById(id);
     }
+
+
+    protected JList createConceptList() {
+        //JList<SupportInstance> supportinst = cnDao.find("t.categories");
+        //conceptDao.find("t.");
+        JList list = new JList();
+        return list;
+    }
+    
 }

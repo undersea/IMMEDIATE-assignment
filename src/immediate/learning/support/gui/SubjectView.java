@@ -57,14 +57,9 @@ public class SubjectView extends Box {
         associateDaos(appContext);
         
         associateSubject(title);
-        JLabel idLabel = new JLabel("Subject ID");
-        add(idLabel);
-        JTextField idField = new JTextField(subject.getId().toString());
-        add(idField);
-        JLabel titleLabel = new JLabel("Subject");
+        JLabel titleLabel = new JLabel(subject.getTitle());
         add(titleLabel);
-        JTextField titleField = new JTextField(subject.getTitle());
-        add(titleField);
+        
         add(createCategoryPanel());
         
     }

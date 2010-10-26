@@ -46,6 +46,10 @@ public class JpaDao<T> extends JpaDaoSupport implements Dao<T> {
         return getJpaTemplate().find(String.format("select t from %s t", identifier.getSimpleName()));
     }
 
+    public List<T> find(String where) {
+        return getJpaTemplate().find(String.format("select t from %s t where %s", identifier.getSimpleName(), where));
+    }
+
     @Transactional
     public void close() {
         getJpaTemplate().flush();

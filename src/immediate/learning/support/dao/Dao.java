@@ -17,5 +17,7 @@ public interface Dao<T> {
 
     public List<T> getAll();
 
+    public List<T> find(String where);
+
     public void close();
 }
