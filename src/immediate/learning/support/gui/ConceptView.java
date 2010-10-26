@@ -1,5 +1,6 @@
 package immediate.learning.support.gui;
 
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLayeredPane;
@@ -27,18 +28,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /*the only view class not to implement View due to it's specialised needs*/
-public class CategoryView extends Box {
+public class ConceptView extends Box {
     private static final long serialVersionUID = 1L;
 
-    private Category category;
+    private Concept concept;
 
     @Autowired
     @Qualifier(value = "categoryDao")
     static Dao<Category> categoryDao;
 
     @Autowired
-    @Qualifier(value = "categoryNamesDao")
-    static Dao<CategoryNames> cnDao;
+    @Qualifier(value = "conceptDao")
+    static Dao<Concept> cnDao;
 
     @Autowired
     @Qualifier(value = "categoryDescriptorDao")
@@ -48,10 +49,10 @@ public class CategoryView extends Box {
     @Qualifier(value = "subjectDao")
     private SubjectDao subjectDao;
 
-    public CategoryView(String title, 
+    public ConceptView(String title, 
                        ClassPathXmlApplicationContext appContext) {
         super(BoxLayout.Y_AXIS);
-        //setPreferredSize(new java.awt.Dimension(300, 300));
+        setPreferredSize(new java.awt.Dimension(300, 300));
         
         associateDaos(appContext);
         
@@ -68,7 +69,7 @@ public class CategoryView extends Box {
         
     }
 
-    public CategoryView(Long id, 
+    public ConceptView(Long id, 
                        ClassPathXmlApplicationContext appContext) {
         super(BoxLayout.Y_AXIS);
         associateDaos(appContext);
@@ -84,7 +85,7 @@ public class CategoryView extends Box {
         categoryDao = (Dao<Category>)appContext.getBean("categoryDao");
         cDao = 
             (CategoryDescriptorDao)appContext.getBean("categoryDescriptorDao");
-        cnDao = (Dao<CategoryNames>)appContext.getBean("categoryNamesDao");
+        cnDao = (Dao<Concept>)appContext.getBean("conceptDao");
     }
 
     public Box createCategoryPanel() {
@@ -125,24 +126,13 @@ public class CategoryView extends Box {
     }
 
     
-
-    protected void associateSubject(String title) {
-        List<Subject> subjectList = subjectDao.findByName(title);
-        if(subjectList.size() != 0) {
-            subject = subjectList.get(0);
-            System.out.println("Old subject row selected" + subjectList.size());
-        } else {
-            // Create new subject
-            subject = new Subject();
-            subject.setTitle(title);
-            subjectDao.save(subject);
-            
-            System.out.println("New subject row selected");
-        }
+    protected void associateConcept(String name) {
+        concept = new Concept();
+        concept.setName(name);
+        cnDao.save(concept);
     }
 
-
-    protected void associateSubject(Long id) {
-        subject = subjectDao.findById(id);
+    protected void associateConcept(Long id) {
+        concept = cnDao.findById(id);
     }
 }

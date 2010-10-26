@@ -40,7 +40,7 @@ X-COMMENT: Main-Class will be added automatically by build
         <attribute name="Main-Class"
                  value="Main"/>
         <attribute name="Class-Path"
-                   value="${lib.dir}/org.springframework.aspects-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.beans-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.core-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.orm-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.test-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.transaction-3.0.5.RELEASE.jar ${lib.dir}/sqltool.jar ${lib.dir}/toplink-essentials.jar ${lib.dir}/commons-lang.jar ${lib.dir}/org.springframework.context-3.0.5.RELEASE.jar ${lib.dir}/commons-logging.jar ${lib.dir}/org.springframework.asm-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.expression-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.jdbc-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.instrument-3.0.5.RELEASE.jar"/>
+                   value="${lib.dir}/org.springframework.aspects-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.beans-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.core-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.orm-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.test-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.transaction-3.0.5.RELEASE.jar ${lib.dir}/sqltool.jar ${lib.dir}/toplink-essentials.jar ${lib.dir}/commons-lang.jar ${lib.dir}/org.springframework.context-3.0.5.RELEASE.jar ${lib.dir}/commons-logging.jar ${lib.dir}/org.springframework.asm-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.expression-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.jdbc-3.0.5.RELEASE.jar ${lib.dir}/org.springframework.instrument-3.0.5.RELEASE.jar ${lib.dir}/commons-dbcp-1.4.jar ${lib.dir}/commons-pool-1.5.5.jar ${lib.dir}/commons-collections-3.2.1.jar ${lib.dir}/org.springframework.aop-3.0.5.RELEASE.jar ${lib.dir}/aopalliance-1.0.jar ${lib.dir}/aspectjweaver-1.6.1.jar"/>
       </manifest>
 
     </jar>
@@ -51,13 +51,6 @@ X-COMMENT: Main-Class will be added automatically by build
     <java dir="${app.dir}" jar="${app.dir}/immediate.jar" fork="true" classpathref="project.class.path">
       <!-- needs to be jvmarg for the application to work -->
       <jvmarg value="-javaagent:${lib.dir}/org.springframework.instrument-3.0.5.RELEASE.jar"/>
-<!--      <classpath>
-        <pathelement location="${lib.dir}/eclipselink.jar"/>
-        <pathelement location="${lib.dir}/javax.persistence_1.0.0.jar"/>
-        <pathelement location="${lib.dir}/commons-lang.jar"/>
-        
-        <pathelement path="${java.class.path}"/>
-      </classpath>-->
     </java>
   </target>
 
@@ -82,13 +75,13 @@ X-COMMENT: Main-Class will be added automatically by build
   </target>
 
   <target name="clean">
-    <echo>Delete all class files uder build directory</echo>
+    <echo>Delete all class files under build directory</echo>
     <delete quiet="true">
       <fileset dir="${build.dir}" includes="**/*.class"/>
     </delete>
-    <echo>Now delete the prototype and all the supporting files</echo>
+    <!--<echo>Now delete the prototype and all the supporting files</echo>
     <delete quiet="true">
       <fileset dir="${app.dir}"/>
-    </delete>
+    </delete>-->
   </target>
 </project>

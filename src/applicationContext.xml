@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans
-
-http://www.springframework.org/schema/beans/spring-beans.xsd">
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns="http://www.springframework.org/schema/beans"
+       
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+  default-autowire="byType">
 
   <bean id="subjectDao" class="immediate.learning.support.dao.JpaSubjectDao">
     <property name="entityManagerFactory" ref="entityManagerFactory"/>
@@ -16,12 +21,18 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     </constructor-arg>
   </bean>
 
-
-  <bean id="categoryDescriptorDao" class="immediate.learning.support.dao.JpaDao">
+  <bean id="categoryNamesDao" class="immediate.learning.support.dao.JpaDao">
     <property name="entityManagerFactory" ref="entityManagerFactory"/>
     <constructor-arg>
-      <value>immediate.learning.support.entity.CategoryDescriptor</value>
+        <value>immediate.learning.support.entity.CategoryNames</value>
     </constructor-arg>
+  </bean>
+
+  <bean id="categoryDescriptorDao" class="immediate.learning.support.dao.JpaCategoryDescriptorDao">
+    <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    <!--<constructor-arg>
+      <value>immediate.learning.support.entity.CategoryDescriptor</value>
+    </constructor-arg>-->
   </bean>
 
   <bean id="conceptDao" class="immediate.learning.support.dao.JpaDao">
@@ -59,9 +70,11 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     </property>
   </bean>
 
-  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+  <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
     <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
-    <property name="url" value="jdbc:hsqldb:hsql:immediate"/>
+    <property name="url" value="jdbc:hsqldb:hsql:immediate;shutdown=true"/>
     <property name="username" value="sa"/>
     <property name="password" value=""/>
     
@@ -72,4 +85,22 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <property name="dataSource" ref="dataSource"/>
   </bean>
 
+  <!-- This tells Spring to activate annotation-driven transactions -->
+  <tx:annotation-driven/>
+
+  <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <tx:attributes>
+      <tx:method name="get*" read-only="true"/>
+      <tx:method name="*"/>
+    </tx:attributes>
+  </tx:advice>
+  
+  <aop:config>
+    <aop:pointcut id="serviceOperation" expression="execution(* immediate.learning.service.*.*(..))"/>
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"/>
+  </aop:config>	
+
+  <bean id="transService"
+        class="immediate.learning.support.service.ServiceImpl"/>
+  
 </beans>

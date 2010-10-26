@@ -28,10 +28,8 @@ public class Category implements Serializable {
     @OneToMany(mappedBy="category")
     private Set<SupportInstance> instances = new HashSet<SupportInstance>();
     
-    @OneToMany(mappedBy="category")
-    private Set<CategoryDescriptor> possibleComponents = new HashSet<CategoryDescriptor>();
-
-    @Column(name="NAME", nullable=false, unique=true)
+    
+    @Column(name="NAME", nullable=false)
     private String name;
 
     public Long getId() {
@@ -67,7 +65,5 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Set<CategoryDescriptor> getPossibleComponents() {
-        return possibleComponents;
-    }
+    
 }

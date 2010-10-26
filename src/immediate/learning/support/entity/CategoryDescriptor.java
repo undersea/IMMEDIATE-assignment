@@ -15,7 +15,8 @@ import java.util.Set;
 import java.util.HashSet;
 
 
-import immediate.learning.support.gui.Component;
+import immediate.learning.support.component.Component;
+
 
 
 @Entity
@@ -27,30 +28,39 @@ public class CategoryDescriptor implements Serializable {
     @Column(name="ID", nullable=false)
     private Long id;
 
-    @ManyToOne
-    private Category category;
+    @Column(name="CATEGORY", nullable=false)
+    private String category;
 
     //Will be a string representation of a class
     @Column(name="COMPONENT")
-    private Component component;
+    private String component;
+
+
+    @ManyToOne
+    private CategoryNames name;
 
     
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
 
-    public Component getComponent() {
+    public String getComponent() {
         return component;
     }
 
 
-    public void setComponent(Component component) {
+    public void setComponent(String component) {
         this.component = component;
+    }
+
+
+    public CategoryNames getName() {
+        return name;
     }
 }

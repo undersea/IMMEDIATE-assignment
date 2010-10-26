@@ -5,15 +5,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToOne;
 
 import java.util.Set;
 import java.util.HashSet;
 
 
+import immediate.learning.support.component.Component;
+
+
 @Entity
-class Concept implements Serializable {
+public class ComponentList implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -21,30 +27,17 @@ class Concept implements Serializable {
     @Column(name="ID", nullable=false)
     private Long id;
 
-    @Column(name="NAME", nullable=false)
-    private String name;
 
-    @OneToMany(mappedBy="concept")
-    private Set<SupportInstance> instances = new HashSet<SupportInstance>();
+    @Column(name="COMPONENT")
+    private Component component;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    
+    public Component getComponent() {
+        return component;
     }
 
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<SupportInstance> getInstances() {
-        return instances;
+    public void setComponent(Component component) {
+        this.component = component;
     }
 }

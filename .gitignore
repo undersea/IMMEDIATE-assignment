@@ -62,3 +62,10 @@
 /prototypes/hsql:immediate.script
 /build/immediate/learning/support/gui/ExplainMore$Configuration.class
 /build/immediate/learning/support/gui/ExplainMore.class
+/documentation/Imidiate screen shots.ppt
+/prototypes/libs/aopalliance-1.0.jar
+/prototypes/libs/aspectjweaver-1.6.1.jar
+/prototypes/libs/commons-collections-3.2.1.jar
+/prototypes/libs/commons-dbcp-1.4.jar
+/prototypes/libs/commons-pool-1.5.5.jar
+/prototypes/libs/org.springframework.aop-3.0.5.RELEASE.jar

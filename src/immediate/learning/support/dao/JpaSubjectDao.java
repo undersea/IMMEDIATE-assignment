@@ -2,10 +2,11 @@ package immediate.learning.support.dao;
 
 import java.util.List;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import immediate.learning.support.entity.Subject;
 
-//@Transactional
+@Transactional
 public class JpaSubjectDao extends JpaDaoSupport implements SubjectDao {
     public Subject findById(Long id) {
         return getJpaTemplate().find(Subject.class, id);
@@ -28,5 +29,11 @@ public class JpaSubjectDao extends JpaDaoSupport implements SubjectDao {
         getJpaTemplate().remove(subject);
     }
 
-
+    public void close() {
+        try {
+            getJpaTemplate().flush();
+        }catch(Exception e) {
+            System.err.println(getJpaTemplate().getEntityManager());
+        }
+    }
 }

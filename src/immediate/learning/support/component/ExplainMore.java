@@ -1,4 +1,4 @@
-package immediate.learning.support.gui;
+package immediate.learning.support.component;
 
 import javax.swing.JComponent;
 import javax.swing.JTextPane;
@@ -16,6 +16,11 @@ public class ExplainMore implements Component {
         explanation = new String();
     }
 
+
+    public String getAttr(String key) {
+        return null;
+    }
+
     public JComponent configure() {
         return new Configuration(explanation);
     }
@@ -27,6 +32,10 @@ public class ExplainMore implements Component {
 
     public String getDescription() {
         return "A means of giving more explaination about a concept";
+    }
+
+    public JComponent getComponent() {
+        return null;
     }
 
     class Configuration extends Box {
