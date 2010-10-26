@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /*the only view class not to implement View due to it's specialised needs*/
+@SuppressWarnings("unchecked")
 public class SubjectView extends Box {
     private static final long serialVersionUID = 1L;
 
@@ -48,6 +49,8 @@ public class SubjectView extends Box {
     @Autowired
     @Qualifier(value = "subjectDao")
     private SubjectDao subjectDao;
+
+    private ClassPathXmlApplicationContext appContext;
 
     public SubjectView(String title, 
                        ClassPathXmlApplicationContext appContext) {
@@ -76,6 +79,7 @@ public class SubjectView extends Box {
 
 
     private void associateDaos(ClassPathXmlApplicationContext appContext) {
+        this.appContext = appContext;
         subjectDao = (SubjectDao)appContext.getBean("subjectDao");;
         categoryDao = (Dao<Category>)appContext.getBean("categoryDao");
         cDao = 

@@ -18,6 +18,8 @@ import java.util.Vector;
 
 import immediate.learning.support.entity.Subject;
 import immediate.learning.support.entity.Category;
+import immediate.learning.support.entity.Concept;
+import immediate.learning.support.entity.Support;
 import immediate.learning.support.entity.CategoryNames;
 import immediate.learning.support.entity.SupportInstance;
 import immediate.learning.support.entity.CategoryDescriptor;
@@ -29,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /*the only view class not to implement View due to it's specialised needs*/
+@SuppressWarnings("unchecked")
 public class CategoryView extends Box {
     private static final long serialVersionUID = 1L;
 
@@ -36,11 +39,15 @@ public class CategoryView extends Box {
 
     @Autowired
     @Qualifier(value = "categoryDao")
-    static Dao<Category> categoryDao;
+    Dao<Category> categoryDao;
+
+    @Autowired
+    @Qualifier(value = "conceptDao")
+    Dao<Concept> conceptDao;
 
     @Autowired
     @Qualifier(value = "supportInstanceDao")
-    static Dao<SupportInstance> cnDao;
+    Dao<SupportInstance> cnDao;
 
     @Autowired
     @Qualifier(value = "categoryDescriptorDao")
@@ -50,8 +57,10 @@ public class CategoryView extends Box {
     @Qualifier(value = "subjectDao")
     private SubjectDao subjectDao;
 
+    private ClassPathXmlApplicationContext appContext;
+
     public CategoryView(String title, 
-                       ClassPathXmlApplicationContext appContext) {
+                        ClassPathXmlApplicationContext appContext) {
         super(BoxLayout.Y_AXIS);
         //setPreferredSize(new java.awt.Dimension(300, 300));
         
@@ -66,7 +75,7 @@ public class CategoryView extends Box {
     }
 
     public CategoryView(Long id, 
-                       ClassPathXmlApplicationContext appContext) {
+                        ClassPathXmlApplicationContext appContext) {
         super(BoxLayout.Y_AXIS);
         associateDaos(appContext);
         setPreferredSize(new java.awt.Dimension(300, 300));
@@ -78,11 +87,13 @@ public class CategoryView extends Box {
 
 
     private void associateDaos(ClassPathXmlApplicationContext appContext) {
+        this.appContext = appContext;
         subjectDao = (SubjectDao)appContext.getBean("subjectDao");;
         categoryDao = (Dao<Category>)appContext.getBean("categoryDao");
         cDao = 
             (CategoryDescriptorDao)appContext.getBean("categoryDescriptorDao");
         cnDao = (Dao<SupportInstance>)appContext.getBean("supportInstanceDao");
+        conceptDao = (Dao<Concept>)appContext.getBean("conceptDao");
     }
 
     public Box createConceptPanel() {
@@ -97,6 +108,10 @@ public class CategoryView extends Box {
         listScroller2.setPreferredSize(new Dimension(250, 80));
         panel.add(listScroller2);
 
+        JButton addButton = new JButton("Add");
+        panel.add(addButton);
+        JTextField addField = new JTextField(20);
+        panel.add(addField);
         return panel;
     }
 
@@ -119,9 +134,9 @@ public class CategoryView extends Box {
 
 
     protected JList createConceptList() {
-        //JList<SupportInstance> supportinst = cnDao.find("t.categories");
-        //conceptDao.find("t.");
-        JList list = new JList();
+        List<Concept> concepts = 
+            conceptDao.find(String.format("t.instances.category.id = %d", category.getId()));
+        JList list = new JList(new Vector(concepts));
         return list;
     }
     

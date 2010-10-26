@@ -14,7 +14,7 @@ import java.util.Set;
 
 
 @Entity
-class Support implements Serializable {
+public class Support implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
