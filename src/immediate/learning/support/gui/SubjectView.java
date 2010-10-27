@@ -12,9 +12,14 @@ import javax.swing.JButton;
 import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
+import javax.swing.DefaultListModel;
 
 import java.util.List;
 import java.util.Vector;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 
 import immediate.learning.support.entity.Subject;
 import immediate.learning.support.entity.Category;
@@ -29,7 +34,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 /*the only view class not to implement View due to it's specialised needs*/
 @SuppressWarnings("unchecked")
-public class SubjectView extends Box {
+public class SubjectView extends Box implements ActionListener {
     private static final long serialVersionUID = 1L;
 
     private Subject subject;
@@ -62,10 +67,12 @@ public class SubjectView extends Box {
         associateSubject(title);
         JLabel titleLabel = new JLabel(subject.getTitle());
         add(titleLabel);
-        
-        add(createCategoryPanel());
+        boxPanel = createCategoryPanel();
+        add(boxPanel);
         
     }
+
+    Box boxPanel;
 
     public SubjectView(Long id, 
                        ClassPathXmlApplicationContext appContext) {
@@ -78,6 +85,9 @@ public class SubjectView extends Box {
     }
 
 
+    JButton addButton;
+    JButton removeButton;
+
     private void associateDaos(ClassPathXmlApplicationContext appContext) {
         this.appContext = appContext;
         subjectDao = (SubjectDao)appContext.getBean("subjectDao");;
@@ -87,9 +97,12 @@ public class SubjectView extends Box {
         cnDao = (Dao<CategoryNames>)appContext.getBean("categoryNamesDao");
     }
 
+    JList selectedCategory;
+    JList possibleCategory;
+
     public Box createCategoryPanel() {
         Box panel = new Box(BoxLayout.X_AXIS);
-        JList selectedCategory = createActualCategoryList();
+        selectedCategory = createActualCategoryList();
         
         selectedCategory.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         selectedCategory.setLayoutOrientation(JList.VERTICAL_WRAP);
@@ -100,11 +113,12 @@ public class SubjectView extends Box {
         panel.add(listScroller);
         Box bbox = new Box(BoxLayout.Y_AXIS);
         panel.add(bbox);
-        JButton addButton = new JButton("Add");
+        addButton = new JButton("<");
+        addButton.addActionListener(this);
         bbox.add(addButton);
-        JButton removeButton = new JButton("Remove");
+        removeButton = new JButton(">");
         bbox.add(removeButton);
-        JList possibleCategory = createPosibleCategoryList();
+        possibleCategory = createPosibleCategoryList();
         
         possibleCategory.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         possibleCategory.setLayoutOrientation(JList.VERTICAL_WRAP);
@@ -117,11 +131,24 @@ public class SubjectView extends Box {
     }
 
     public JList createActualCategoryList() {
-        return new JList(new Vector<Category>(subject.getCategories()));
+        DefaultListModel model = new DefaultListModel();
+        for(Object obj : subject.getCategories()) {
+            model.addElement(obj);
+        }
+        JList list = new JList(model);
+        
+        return list;
     }
 
     public JList createPosibleCategoryList() {
-        return new JList(new Vector<CategoryNames>(cnDao.getAll()));
+        DefaultListModel model = new DefaultListModel();
+        for(Object obj : cnDao.getAll()) {
+            model.addElement(obj);
+        }
+        JList list = new JList(model);
+        list.setModel(model);
+
+        return list;
     }
 
     
@@ -144,5 +171,30 @@ public class SubjectView extends Box {
 
     protected void associateSubject(Long id) {
         subject = subjectDao.findById(id);
+    }
+
+
+    public void actionPerformed(ActionEvent e) {
+        //JList selectedCategory;
+        //JList possibleCategory;
+        Object src = e.getSource();
+        if(src == addButton) { // rearrange the components to show Concept
+            //add to used list
+            System.out.println("Hello");
+            String name = (String)((CategoryNames)possibleCategory.getSelectedValue()).getName();
+            System.out.println("Hello2");
+            DefaultListModel model = (DefaultListModel)selectedCategory.getModel();
+            model.addElement(name);
+            Category category = new Category();
+            category.setName(name);
+            category.setSubject(subject);
+            categoryDao.save(category);
+            remove(boxPanel);
+            add(new ConceptView("", appContext));
+            revalidate();
+            repaint();
+        } else if(src == removeButton) {
+            //remove category from the used list
+        }
     }
 }

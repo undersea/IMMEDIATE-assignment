@@ -22,10 +22,13 @@ import immediate.learning.support.dao.SubjectDao;
 import immediate.learning.support.dao.Dao;
 import immediate.learning.support.dao.CategoryDescriptorDao;
 import immediate.learning.support.entity.Category;
+import immediate.learning.support.entity.CategoryNames;
 import immediate.learning.support.entity.CategoryDescriptor;
 import immediate.learning.support.component.Component;
 
+@SuppressWarnings("unchecked")
 public class MakeCategory extends Box implements ActionListener {
+    private static final long serialVersionUID = 1L;
     JTextField categoryField = new JTextField(10);
     String componentPackage = "immediate.learning.support.component";
     String[] components = {"ExplainMore","Player","Question", "Recorder"};
@@ -40,9 +43,14 @@ public class MakeCategory extends Box implements ActionListener {
     @Qualifier(value = "categoryDescriptorDao")
     CategoryDescriptorDao cDao;
 
-    public MakeCategory(CategoryDescriptorDao cDao) {
+    @Autowired
+    @Qualifier(value = "categoryNameDao")
+    Dao<CategoryNames> cNameDao;
+
+    public MakeCategory(CategoryDescriptorDao cDao, Dao<CategoryNames> cNameDao) {
         super(BoxLayout.Y_AXIS);
         this.cDao = cDao;
+        this.cNameDao = cNameDao;
         add(new JLabel("Category name"));
         add(categoryField);
         Box cBox = new Box(BoxLayout.X_AXIS);
@@ -59,10 +67,10 @@ public class MakeCategory extends Box implements ActionListener {
 
         Box bbox = new Box(BoxLayout.Y_AXIS);
         cBox.add(bbox);
-        addButton = new JButton("Add");
+        addButton = new JButton("<");
         addButton.addActionListener(this);
         bbox.add(addButton);
-        removeButton = new JButton("Remove");
+        removeButton = new JButton(">");
         removeButton.addActionListener(this);
         bbox.add(removeButton);
         possibleCategory = new JList(components);
@@ -97,6 +105,12 @@ public class MakeCategory extends Box implements ActionListener {
             }
         } else if(src == okButton) {
             String name = categoryField.getText();
+            CategoryNames catname = new CategoryNames();
+            try {
+                catname.setName(name);
+                cNameDao.save(catname);
+            } catch(Exception exe) {}
+            
             DefaultListModel model = 
                 ((DefaultListModel)(selectedCategory.getModel()));
             Enumeration<Object> elems = (Enumeration<Object>)model.elements();
@@ -108,8 +122,10 @@ public class MakeCategory extends Box implements ActionListener {
                     String classStr = String.format("%s.%s", componentPackage, item.toString());
                     Component component = (Component)Class.forName(classStr).newInstance();
                     desc.setComponent(classStr);
+                    
+                    desc.setName(catname);
                     cDao.save(desc);
-                    cDao.close();
+                    
                 }catch(Exception ex) {
                     ex.printStackTrace();
                 }

@@ -68,5 +68,7 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    
+    public String toString() {
+        return String.format("%s %d", name, id);
+    }
 }

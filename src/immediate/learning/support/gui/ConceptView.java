@@ -19,6 +19,7 @@ import java.util.Vector;
 import immediate.learning.support.entity.Concept;
 import immediate.learning.support.entity.Category;
 import immediate.learning.support.entity.Support;
+import immediate.learning.support.entity.SupportInstance;
 import immediate.learning.support.entity.CategoryNames;
 import immediate.learning.support.entity.CategoryDescriptor;
 import immediate.learning.support.dao.SubjectDao;
@@ -34,6 +35,8 @@ public class ConceptView extends Box {
     private static final long serialVersionUID = 1L;
 
     private Concept concept;
+
+    private Category category;
 
     @Autowired
     @Qualifier(value = "categoryDao")
@@ -55,6 +58,34 @@ public class ConceptView extends Box {
     @Qualifier(value = "supportDao")
     Dao<Support> supportDao;
 
+
+    @Autowired
+    @Qualifier(value="supportInstanceDao")
+    Dao<SupportInstance> supportInstanceDao;
+
+   
+
+     public ConceptView(Category category, 
+                        ClassPathXmlApplicationContext appContext) {
+         super(BoxLayout.Y_AXIS);
+         setPreferredSize(new java.awt.Dimension(300, 300));
+        
+
+         System.out.println("ConceptView");
+         associateDaos(appContext);
+        
+         
+         //associateConcept("");
+         concept = new Concept();
+         cnDao.save(concept);
+         this.category = category;
+                
+         JLabel titleLabel = new JLabel(String.format("Concept: %s", concept.getName()));
+         add(titleLabel);
+        
+         add(createComponentPanel());
+        
+    }
 
     public ConceptView(String title, 
                        ClassPathXmlApplicationContext appContext) {
@@ -93,6 +124,9 @@ public class ConceptView extends Box {
             (CategoryDescriptorDao)appContext.getBean("categoryDescriptorDao");
         cnDao = (Dao<Concept>)appContext.getBean("conceptDao");
         supportDao = (Dao<Support>)appContext.getBean("supportDao");
+        supportInstanceDao = 
+            (Dao<SupportInstance>)appContext.getBean("supportInstanceDao");
+        
     }
 
     public Box createComponentPanel() {
@@ -108,9 +142,9 @@ public class ConceptView extends Box {
         panel.add(listScroller);
         Box bbox = new Box(BoxLayout.Y_AXIS);
         panel.add(bbox);
-        JButton addButton = new JButton("Add");
+        JButton addButton = new JButton("<");
         bbox.add(addButton);
-        JButton removeButton = new JButton("Remove");
+        JButton removeButton = new JButton(">");
         bbox.add(removeButton);
         JList possibleCategory = createPosibleCategoryList();
         
@@ -125,14 +159,36 @@ public class ConceptView extends Box {
     }
 
     public JList createActualComponentList() {
-        List<Support> supportList = 
-            supportDao.find(String.format("t.instances.concept.id = %d", concept.getId()));
-        return new JList(new Vector<Support>(supportList));
+        JList list;
+        List<SupportInstance> supportList = 
+            supportInstanceDao.find(String.format("t.concept.id = %d", 
+                                                  concept.getId()));
+        if(supportList.size() > 0) {
+            Vector<Support> vect = new Vector<Support>();
+            for(SupportInstance inst : supportList) {
+                vect.add(inst.getSupport());
+            }
+            list = new JList(vect);
+        } else {
+            list = new JList();
+        }
+
+        return list;
     }
 
 
     public JList createPosibleCategoryList() {
-        List<
+        Vector<String> tmp = new Vector<String>();
+        try {
+            List<CategoryDescriptor> descrlist = 
+                cDao.find(String.format("t.category like '%s'", category.getName()));
+            
+            for(CategoryDescriptor d : descrlist) {
+                tmp.add(d.getComponent());
+            }
+        }catch(Exception e) {}
+
+        return new JList(tmp);
     }
     
 

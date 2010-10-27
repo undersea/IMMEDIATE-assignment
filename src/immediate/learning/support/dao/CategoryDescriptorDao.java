@@ -19,4 +19,6 @@ public interface CategoryDescriptorDao {
     public List<CategoryDescriptor> getAll();
 
     public void close();
+
+    public List<CategoryDescriptor> find(String where);
 }

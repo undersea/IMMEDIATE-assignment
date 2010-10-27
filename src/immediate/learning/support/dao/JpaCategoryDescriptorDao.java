@@ -58,4 +58,8 @@ public class JpaCategoryDescriptorDao extends JpaDaoSupport implements CategoryD
         System.out.println("CategoryDescriptor close");
         getJpaTemplate().flush();
     }
+
+    public List<CategoryDescriptor> find(String where) {
+        return getJpaTemplate().find(String.format("select t from %s t where %s", identifier.getSimpleName(), where));
+    }
 }

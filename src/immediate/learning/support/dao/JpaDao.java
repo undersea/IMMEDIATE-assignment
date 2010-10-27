@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+@SuppressWarnings("unchecked")
 @Transactional
 public class JpaDao<T> extends JpaDaoSupport implements Dao<T> {
     protected Class<T> identifier;

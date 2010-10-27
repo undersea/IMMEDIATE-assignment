@@ -63,4 +63,9 @@ public class CategoryDescriptor implements Serializable {
     public CategoryNames getName() {
         return name;
     }
+
+    public void setName(CategoryNames name) {
+        this.name = name;
+    }
+
 }
