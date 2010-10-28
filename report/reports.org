@@ -4,7 +4,7 @@
 #+DATE:      
 #+DESCRIPTION: 
 #+KEYWORDS: 
-#+LaTeX_CLASS_OPTIONS: [10pt,A4]
+#+LaTeX_CLASS_OPTIONS: [12pt,a4paper]
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
@@ -17,9 +17,11 @@
 
 #+LaTeX_HEADER: \setlength{\parindent}{0pt}
 #+LaTeX_HEADER: \setlength{\parskip}{1em}
-
+#+LaTeX_HEADER: \usepackage[a4paper]{geometry}
+#+LaTeX_HEADER:  \usepackage[top=12cm, bottom=5cm, left=2cm, right=2cm]{geometry} 
 
 * What I did do and what I would have liked to do.
+
   While I did not complete the programme, and many of the features I
   did do not function the way I designed them to.  They did start to
   show some of the features of my design.
@@ -42,6 +44,7 @@
   which you would select the category to edit.  This screen would
   be the one shown in figure 2.  I have yet to add this ability, but
   the selection of category would be done there.
+
   #+attr_latex: width=30em \textwidth
   #+CAPTION: Category creation dialog
   [[file:images/0-Category-Creation.png]]
@@ -57,6 +60,7 @@
   subject.  and with each concept, you can add or remove
   components. The idea was to, as they are added, the categories are
   edited which brings you to the next screen, shown in figure 3.  
+
   #+attr_latex: width=30em \textwidth
   #+CAPTION:  Subject Category list view
   [[file:images/1-Category-List.png]]
@@ -80,8 +84,7 @@
   #+CAPTION: Category Concept list view
   [[file:images/2-Category-Concept-List.png]]
 
-  The
-  idea is that, initially, you are to configure everything you need,
+  Initially, you are to configure everything you need,
   like going through a wizard, but not forcing you to go all the way
   to the end before going on to the next component.  While you are
   force to go to the next screen at each addition, you can go back.  I
@@ -110,6 +113,15 @@
   but I was thinking it could be handled with a next and back button.
 
 
+
+* Technical details
+
+  This application is written in java. It uses swing widgets for the
+  graphical user interface part.  For the database or persistence side
+  I used a standalone database system embedded in java in the form of
+  the Spring frame work using JPA as the backend of the DAO.  This was
+  configured, through a couple of xml files which defined the DAOs and
+  database engine in the form of some bean tags.
 * How would I test it
 
   I would want to get as many people to test this as possible. Given
@@ -149,31 +161,43 @@
   - Is it easy to follow any help and documentation given by the
     programme?
 
- The last question is not applicable, at the moment, due to the lack of help and
- documentation.  This will be left in anyway, to give a indication of
- progress when the test is done again.  It also gives a indication of
- how mature and ready the product is compared to others, if a
- comparison was done.
+   
+
+  The last question is not applicable, at the moment, due to the lack
+  of help and documentation.  This will be left in anyway, to give a
+  indication of progress when the test is done again.  It also gives a
+  indication of how mature and ready the product is compared to
+  others, if a comparison was done.
 
  
  Scenario
-  - You have a English Language paper to add learning support to
-  - You want to give the students support on pronunciation and meanings
-    of words.
-  - You have decided that each word shall have playback of the correct
-    pronunciation
-  - A means for the student to practice by recording and playing
-    their pronunciation back so they can hear themselves pronounce the
-    word.
-  - Also a explanation of its use in the English language shall be
-    included
- 
+ - You have a English Language paper to add learning support to
+ - You want to give the students support on pronunciation and meanings
+   of words.
+ - You have decided that each word shall have playback of the correct
+   pronunciation
+ - A means for the student to practice by recording and playing
+   their pronunciation back so they can hear themselves pronounce the
+   word.
+ - Also a explanation of its use in the English language shall be
+   included
+
+ This, I think, should represent a typical scenario for adding
+ material.  They shouldn't have to, most of the time do anything more
+ complicated than this.  Since I think that is a typical scenario, it
+ should pick up major bugs in the system.
+
+
  Evaluator portfolio
-  - This will be a teacher of the paper, ideally a English teacher
-  - They should be familiar with using computers, but not power users,
-    with their everyday use being to use the computer as a word
-    processor and spreadsheet.  They should know how to use a
-    Internet browser like Firefox.
+ - This will be a teacher of the paper, ideally a English teacher
+ - They should be familiar with using computers, but not power users,
+   with their everyday use being to use the computer as a word
+   processor and spreadsheet.  They should know how to use a
+   Internet browser like Firefox.
+
+ The above is what I expect a modern teacher to be like,, or for that
+ matter a modern lecturer.  I expect them not to be like fish out of
+ water, but not totally confident.
 
 
 
