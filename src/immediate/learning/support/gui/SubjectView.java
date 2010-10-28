@@ -190,9 +190,11 @@ public class SubjectView extends Box implements ActionListener {
             category.setSubject(subject);
             categoryDao.save(category);
             remove(boxPanel);
-            add(new ConceptView("", appContext));
+            System.out.println("Before category");
+            add(new CategoryView(category.getId(), appContext));
             revalidate();
             repaint();
+            System.out.println("After category");
         } else if(src == removeButton) {
             //remove category from the used list
         }

@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import java.util.List;
 import java.util.Vector;
 
+import immediate.learning.support.component.Component;
 import immediate.learning.support.entity.Subject;
 import immediate.learning.support.entity.Category;
 import immediate.learning.support.entity.Concept;
@@ -71,18 +72,19 @@ public class CategoryView extends Box {
         JTextField titleField = new JTextField(String.format("Category: %s", category.getName()));
         add(titleField);
         
-        
+        add(createConceptPanel());
     }
 
     public CategoryView(Long id, 
                         ClassPathXmlApplicationContext appContext) {
         super(BoxLayout.Y_AXIS);
         associateDaos(appContext);
-        setPreferredSize(new java.awt.Dimension(300, 300));
+        //setPreferredSize(new java.awt.Dimension(300, 300));
         
         associateCategory(id);
         JTextField titleField = new JTextField(String.format("Category: %s", category.getName()));
         add(titleField);
+        add(createConceptPanel());
     }
 
 
@@ -134,9 +136,19 @@ public class CategoryView extends Box {
 
 
     protected JList createConceptList() {
-        List<Concept> concepts = 
-            conceptDao.find(String.format("t.instances.category.id = %d", category.getId()));
-        JList list = new JList(new Vector(concepts));
+        List<CategoryDescriptor> cd = 
+            cDao.find(String.format("t.category = '%s'", category.getName()));
+        
+        Vector<Component> components = new Vector<Component>();
+        for(CategoryDescriptor c : cd ) {
+            try {
+                Component component = (Component)Class.forName(c.getCategory()).newInstance();
+                components.add(component);
+            } catch(Exception e) {}
+            
+        }
+
+        JList list = new JList(new Vector(components));
         return list;
     }
     

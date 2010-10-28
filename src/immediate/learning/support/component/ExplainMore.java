@@ -54,4 +54,8 @@ public class ExplainMore implements Component {
             //setVisible(true);
         }
     }
+
+    public String toString() {
+        return getName();
+    }
 }

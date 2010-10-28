@@ -9,4 +9,9 @@ public interface Component extends Serializable {
     public String getName();
     public String getDescription();
     public JComponent getComponent();
+
+    /**
+     * must override this as it is used to display it in lists
+     */
+    public String toString();
 }

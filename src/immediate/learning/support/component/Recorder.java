@@ -27,4 +27,9 @@ public class Recorder implements Component {
     public JComponent getComponent() {
         return null;
     }
+
+    public String toString() {
+        return getName();
+    }
+
 }

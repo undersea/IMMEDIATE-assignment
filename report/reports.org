@@ -1,9 +1,10 @@
-#+TITLE:     reports.org
+#+TITLE:     Learning support authoring tool
 #+AUTHOR:    James Hurford
-#+EMAIL:     jdhurfor@it040032-desktop
-#+DATE:      2010-10-27 Wed
+#+EMAIL:     
+#+DATE:      
 #+DESCRIPTION: 
 #+KEYWORDS: 
+#+LaTeX_CLASS_OPTIONS: [10pt,A4]
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
@@ -14,8 +15,170 @@
 #+LINK_HOME: 
 #+XSLT: 
 
-* What I did
+#+LaTeX_HEADER: \setlength{\parindent}{0pt}
+#+LaTeX_HEADER: \setlength{\parskip}{1em}
 
-* What I would have like to do
+
+* What I did do and what I would have liked to do.
+  While I did not complete the programme, and many of the features I
+  did do not function the way I designed them to.  They did start to
+  show some of the features of my design.
+
+  First there is the category creation dialog, shown in figure 1.  It shows a list of components on the right and a
+  text-field in which to put the desired category name, plus some
+  buttons to add or remove these components.  Components are the are
+  what represent support in this project.  Click the add to less
+  than to add components and greater than to remove them.  Once you
+  are satisfied with the component choices, you the click 'Ok' to
+  add these to the database.  Unfortunately it does not give any
+  feedback, but this is a feature I would wish to add later given the
+  opportunity.  It would probably consist of a dialog asking if you
+  are sure, giving you an option to change your mind and either add or
+  remove some more components, or change the category name.  I was
+  also wanting to add a option to edit categories, so you can modify
+  what components are available and/or name of the category, and this
+  dialog would do that job as well.  The choice of the category to
+  edit would be decided by the choice you made in a previous screen,
+  which you would select the category to edit.  This screen would
+  be the one shown in figure 2.  I have yet to add this ability, but
+  the selection of category would be done there.
+  #+attr_latex: width=30em \textwidth
+  #+CAPTION: Category creation dialog
+  [[file:images/0-Category-Creation.png]]
+  
+
+  There is then the Subject view which is where the programme is
+  supposed to start, shown in figure 2.  This is where you add or
+  remove categories available to the subject in question.  The idea
+  was originally to only allow one of each type of category to be
+  added to the subject, but since I had not got that far, it was
+  allowed to add as many as you want.  The idea here was that the
+  category could have many concepts associated with it in the
+  subject.  and with each concept, you can add or remove
+  components. The idea was to, as they are added, the categories are
+  edited which brings you to the next screen, shown in figure 3.  
+  #+attr_latex: width=30em \textwidth
+  #+CAPTION:  Subject Category list view
+  [[file:images/1-Category-List.png]]
+
+  This is supposed to show a list of components to add, bu this is
+  where I ran into trouble with the database queries.  You are
+  supposed to be able to add components, like a player, and when you
+  add them, it takes you to another screen which allows you to
+  configure you components, like associate a audio file with the
+  player component.  This screen, was created by a call to a configure
+  function, which all components must implement, which returns a panel
+  to add to the screen to replace the previous one.  All the data
+  associated with this component, were to be stored in the component,
+  which is written to the file-system as a serialized object, and then
+  retrieved later by the client.  This would make it flexible as, no
+  extra fields or tables need be added to the database, all that needs
+  to happen is that any files associated with the component are
+  available to the student when they go to use it.
+
+  #+attr_latex: width=30em \textwidth
+  #+CAPTION: Category Concept list view
+  [[file:images/2-Category-Concept-List.png]]
+
+  The
+  idea is that, initially, you are to configure everything you need,
+  like going through a wizard, but not forcing you to go all the way
+  to the end before going on to the next component.  While you are
+  force to go to the next screen at each addition, you can go back.  I
+  did this as I think it helps to be forced into thinking about
+  setting up what it is you add, by putting you into the next step,
+  but at the same time not forcing you to go all the way through.
+  Another idea I had was that this feature could be turned off.  The reason for allowing the turning
+  off of this feature, as some people might find it distracting.  Also
+  I had the idea of allowing them to go to the next configure screen
+  by clicking on the items in the already added left list.
+
+  The following, shown in figure 4, should give an idea of what it is I had in mind.  Note
+  the close buttons on each of the inner windows.  This was the way I
+  envisioned allowing the user to back to the previous stage.  Not
+  only that but allow them to go back to whatever stage by a single
+  click of the mouse.
+  
+  #+attr_latex: width=15em \textwidth
+  #+CAPTION: Original design idea
+  [[file:images/PrototypeDesign.png]]
+  
+  I also had an idea of added the ability to give the ability of users
+  to make compound components.  They would be components that are put
+  together to make a single support component.  This would complicate
+  the last part where you add this component to support the concept,
+  but I was thinking it could be handled with a next and back button.
+
 
 * How would I test it
+
+  I would want to get as many people to test this as possible. Given
+  that most of the time the available resources do not allow for this
+  most of the time, I would ideally do the following at minimum.
+
+  The select of testers is important, and this is a application
+  designed to make teachers, who are putting together a programme life
+  as easy as possible, I would like to use them as testers.
+
+  If I had the chance, I would select from the most computer literate
+  to the most computer illiterate.  This would give me a good range of
+  responses, which I hope would be more useful altogether.  The idea
+  here is reduce bias.
+
+  Any number of testers is a good number as long as it is not zero,
+  but the more testers means any results I get will be more precise
+  the resulting statistics will be.
+
+  My goal is to test the features I have implemented, so for every
+  feature, there would be a test.  Features would include things like
+  the window open at the time and what the window contained.  The
+  tests will be to indicate several things.  They would be, as taken
+  from Ten Usability Heuristics by Jakob Nielsen, 
+ 
+  - Does the system give the user prompt feedback?
+  - Do they know what is going on?
+  - How easy is it to navigate and manage the programme?
+  - Is the look and feel of the programme consistent and familiar with
+    the platform they are using?
+  - How easy is it to make a mistake?
+  - How much do they have to remember at each stage from the previous
+    and is it easy to figure out what to do next?
+  - Does the programme cater for both beginners as well as power users?
+  - How cluttered and confusing is it?
+  - How easy is it to recover from errors that do occur?
+  - Is it easy to follow any help and documentation given by the
+    programme?
+
+ The last question is not applicable, at the moment, due to the lack of help and
+ documentation.  This will be left in anyway, to give a indication of
+ progress when the test is done again.  It also gives a indication of
+ how mature and ready the product is compared to others, if a
+ comparison was done.
+
+ 
+ Scenario
+  - You have a English Language paper to add learning support to
+  - You want to give the students support on pronunciation and meanings
+    of words.
+  - You have decided that each word shall have playback of the correct
+    pronunciation
+  - A means for the student to practice by recording and playing
+    their pronunciation back so they can hear themselves pronounce the
+    word.
+  - Also a explanation of its use in the English language shall be
+    included
+ 
+ Evaluator portfolio
+  - This will be a teacher of the paper, ideally a English teacher
+  - They should be familiar with using computers, but not power users,
+    with their everyday use being to use the computer as a word
+    processor and spreadsheet.  They should know how to use a
+    Internet browser like Firefox.
+
+
+
+|  \# | Review Checklist                                                                    | Yes No N/A | Comments |
+| 1.1 | Does every display begin with a title or header that describes screen contents?     | 0 0 0      |          |
+| 1.2 | Is there a consistent icon design scheme and stylistic treatment across the system? | 0 0 0      |          |
+| 1.3 |                                                                                     |            |          |
+

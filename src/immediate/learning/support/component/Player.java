@@ -24,5 +24,9 @@ public class Player implements Component {
     public JComponent getComponent() {
         return null;
     }
-    
+
+
+    public String toString() {
+        return getName();
+    }
 }
