@@ -118,10 +118,61 @@
 
   This application is written in java. It uses swing widgets for the
   graphical user interface part.  For the database or persistence side
-  I used a standalone database system embedded in java in the form of
-  the Spring frame work using JPA as the backend of the DAO.  This was
-  configured, through a couple of xml files which defined the DAOs and
-  database engine in the form of some bean tags.
+  the Spring frame work is used.  This was
+  configured, through a XML file which defines Data Access Objects (DAO) instances and
+  the transaction engine to make sure things got committed to the
+  database. Plus it defines what Java Database Connectivity (JDBC) library to use and with all the
+  connection details, such as in this case a file name.  
+
+  Spring is supposed to enable the decoupling of the persistence engine from any specific java code so your programme can
+  be using any persistence method, whether that be a xml file or a
+  relational database.  
+
+  I choose JPA as it allows me to create my
+  entities in code, with very little thinking involved. It was just a
+  matter of create the entity class add in the fields with just a
+  setter and getter for each field.  The JPA engine takes care of all
+  the background SQL that is needed.
+
+  You can see this diagram in figure 5.  In figure 6 is a pictorial
+  view of what is in the application context configuration file fore spring.
+
+  I had trouble with this as I was not familiar with it and my initial
+  setup, while it ran, did not commit anything to the database.  This
+  took a long time to figure out.  
+
+  I found that the problem was the
+  transaction manager not being used. It was not being used, as the DAO instances I was
+  using did not know about it.  I solved this by accident when I used
+  the @Transactional annotation on the DAO implementation classes.  
+
+  It seems the transactional manager is needed to commit to the database.
+  I need them to commit to the database, otherwise my application idea
+  would not work so well.  I was relying on a fully functional database
+  to store my entities in.
+
+  #+attr_latex: width=30em \textwidth
+  #+CAPTION: Architecture diagram of my system
+  [[file:images/Architecture.png]]
+  
+  #+attr_latex: width=30em \textwidth
+  #+CAPTION: Diagrammatic view of the Spring application context file used
+  [[file:images/ApplicationContext.png]]
+  
+The Entities used by this application started out like the diagram in
+figure 7, but I had to add a few to be able to get a list of available
+support components and categories. I also needed to list the
+components without having to link any of this to a subject.  The
+modified diagram is in figure 8.
+
+#+attr_latex: width= 10em \textwidth
+#+CAPTION: Original ER diagram
+[[file:images/Diagram1.png]]
+
+#+attr_latex: width= 30em \textwidth
+#+CAPTION: Modified ER diagram
+[[file:images/Diagram2.png]]
+
 * How would I test it
 
   I would want to get as many people to test this as possible. Given
